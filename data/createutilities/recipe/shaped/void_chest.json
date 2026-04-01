@@ -1,0 +1,23 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "key":  {
+                "X":  {
+                          "item":  "createutilities:graviton_tube"
+                      },
+                "Y":  {
+                          "item":  "createutilities:void_casing"
+                      },
+                "Z":  {
+                          "item":  "minecraft:chest"
+                      }
+            },
+    "pattern":  [
+                    "X",
+                    "Z",
+                    "Y"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "createutilities:void_chest"
+               }
+}

@@ -1,0 +1,17 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "key":  {
+                "X":  {
+                          "item":  "createutilities:void_steel_ingot"
+                      }
+            },
+    "pattern":  [
+                    "XXX",
+                    "XXX",
+                    "XXX"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "createutilities:void_steel_block"
+               }
+}

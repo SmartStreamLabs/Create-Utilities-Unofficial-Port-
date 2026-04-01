@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "createutilities:void_steel_block",
+    "createutilities:void_steel_scaffolding",
+    "createutilities:void_steel_ladder",
+    "createutilities:void_steel_bars",
+    "createutilities:void_casing",
+    "createutilities:void_motor",
+    "createutilities:void_chest",
+    "createutilities:void_tank",
+    "createutilities:void_battery",
+    "createutilities:gearcube",
+    "createutilities:lshaped_gearbox",
+    "createutilities:amethyst_tiles",
+    "createutilities:small_amethyst_tiles"
+  ]
+}

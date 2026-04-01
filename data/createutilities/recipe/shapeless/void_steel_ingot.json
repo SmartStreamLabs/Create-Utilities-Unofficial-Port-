@@ -1,0 +1,12 @@
+﻿{
+    "type":  "minecraft:crafting_shapeless",
+    "ingredients":  [
+                        {
+                            "item":  "createutilities:void_steel_block"
+                        }
+                    ],
+    "result":  {
+                   "count":  9,
+                   "id":  "createutilities:void_steel_ingot"
+               }
+}

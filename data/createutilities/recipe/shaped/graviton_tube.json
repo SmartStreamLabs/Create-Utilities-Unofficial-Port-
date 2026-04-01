@@ -1,0 +1,19 @@
+﻿{
+    "type":  "minecraft:crafting_shaped",
+    "key":  {
+                "X":  {
+                          "item":  "createutilities:polished_amethyst"
+                      },
+                "Y":  {
+                          "item":  "createutilities:void_steel_sheet"
+                      }
+            },
+    "pattern":  [
+                    "X",
+                    "Y"
+                ],
+    "result":  {
+                   "count":  1,
+                   "id":  "createutilities:graviton_tube"
+               }
+}
