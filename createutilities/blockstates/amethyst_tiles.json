@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "createutilities:block/amethyst_tiles"
+    }
+  }
+}

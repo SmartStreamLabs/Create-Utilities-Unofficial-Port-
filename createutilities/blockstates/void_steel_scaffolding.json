@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "bottom=false": {
+      "model": "createutilities:block/void_steel_scaffolding"
+    },
+    "bottom=true": {
+      "model": "createutilities:block/void_steel_scaffolding_horizontal"
+    }
+  }
+}
