@@ -1,0 +1,75 @@
+package me.duquee.createutilities.blocks.voidtypes.tank;
+
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import me.duquee.createutilities.CreateUtilities;
+import me.duquee.createutilities.CreateUtilitiesClient;
+import me.duquee.createutilities.blocks.voidtypes.VoidLinkBehaviour;
+import me.duquee.createutilities.voidlink.VoidLinkSlot;
+import net.createmod.catnip.math.VecHelper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import org.apache.commons.lang3.tuple.Triple;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+
+public class VoidTankTileEntity extends SmartBlockEntity implements IHaveGoggleInformation {
+
+	VoidLinkBehaviour link;
+
+	public VoidTankTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		super(type, pos, state);
+	}
+
+	@Override
+	public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+		createLink();
+		behaviours.add(link);
+	}
+
+	public void createLink() {
+
+		Triple<VoidLinkSlot, VoidLinkSlot, VoidLinkSlot> slots = VoidLinkSlot.makeSlots(
+				index -> new VoidLinkSlot(index,
+						state -> Direction.DOWN,
+						VecHelper.voxelSpace(5.5F, 10.5F, -.001F)) );
+
+		link = new VoidLinkBehaviour(this, slots);
+	}
+
+	public FluidTank getFluidStorage() {
+		return level != null && !level.isClientSide ?
+				CreateUtilities.VOID_TANKS_DATA.computeStorageIfAbsent(link.getNetworkKey()) :
+				CreateUtilitiesClient.VOID_TANKS.computeStorageIfAbsent(link.getNetworkKey());
+	}
+
+	@Override
+	protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+		super.read(tag, registries, clientPacket);
+		if (clientPacket) getFluidStorage().readFromNBT(registries, tag.getCompound("Tank"));
+	}
+
+	@Override
+	protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+		if (clientPacket) tag.put("Tank", getFluidStorage().writeToNBT(registries, new CompoundTag()));
+		super.write(tag, registries, clientPacket);
+	}
+
+	public boolean isClosed() {
+		return getBlockState().getValue(VoidTankBlock.CLOSED);
+	}
+
+	@Override
+	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+		return containedFluidTooltip(tooltip, isPlayerSneaking, getFluidStorage());
+	}
+}
